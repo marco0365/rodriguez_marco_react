@@ -1,0 +1,157 @@
+/* Estilo para el fondo */
+body {
+  background-image: url('../public/img/fondo.gif');
+  background-size: cover;           
+  background-repeat: no-repeat;
+  background-position: center;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  color: #fff;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px; /* Espacio entre el título y el logo */
+  margin-bottom: 20px;
+}
+
+.logo {
+  width: 40px;
+  height: auto;
+}
+
+.container {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  padding: 20px;
+  margin: 20px auto;
+  max-width: 800px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #f4ff60;
+  text-align: center;
+}
+
+.calendar {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.day {
+  width: 100px;
+  border: 1px solid #000000;
+  border-radius: 4px;
+  padding: 10px;
+  text-align: center;
+  background-color: #ecf0f1;
+  
+}
+
+.day h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  color: #fff;
+}
+
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.task-list li {
+  
+  padding: 5px;
+  margin: 5px 0;
+  border-radius: 4px;
+  font-size: 14px;
+  background-image: url('../public/img/gif.gif');
+  background-size: cover;
+}
+
+.delete-button {
+  background-color: transparent;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  margin-left: 10px;
+  font-size: 16px;
+}
+
+.delete-button:hover {
+  color: #adadad;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.form label {
+  font-size: 14px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.form input,
+.form select,
+.form button {
+  padding: 8px;
+  font-size: 14px;
+  border: 1px solid #E75480;
+  border-radius: 4px;
+}
+
+.form button {
+  background-color: #C71585;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.form button:hover {
+  background-color: #FFC0CB;
+  color:black;
+}
+
+.week-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.week-navigation button {
+  background-color: #C71585;
+  color: white;
+  border: 1px solid #E75480;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.week-navigation button:hover {
+  background-color: #FFC0CB;
+  color: black;
+}
+
+.week-navigation span {
+  font-weight: bold;
+  font-size: 18px;
+}
+input[type="text"]::placeholder {
+  color: #fff;
+}
