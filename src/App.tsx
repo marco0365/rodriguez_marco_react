@@ -5,26 +5,27 @@ function App() {
   // calcular la semana actual
   const fechaActual = new Date();
   const inicio = new Date(fechaActual.getFullYear(), 0, 1);
-  const diferencia = (fechaActual.getTime() - inicio.getTime()) + ((inicio.getTimezoneOffset() - fechaActual.getTimezoneOffset()) * 60 * 1000);
-  const unaSemana = 1000 * 60 * 60 * 24 * 7;
-  const semanaActual = Math.floor(diferencia / unaSemana);
-//////////////////////////////////////////////////////////////////////////////////////////////////
+  const diaDeLaSemana = inicio.getDay();
+  const ajuste = (diaDeLaSemana <= 4) ? diaDeLaSemana - 1 : diaDeLaSemana - 8;
+  const diferenciaDias = Math.floor((fechaActual.getTime() - inicio.getTime()) / (1000 * 60 * 60 * 24)) + ajuste;
+  const semanaActual = Math.floor(diferenciaDias / 7) + 1;
+  //////////////////////////////////////////////////////////////////////////////////////////////////
   const [indiceSemana, setIndiceSemana] = useState<number>(semanaActual);
   const [diaSeleccionado, setDiaSeleccionado] = useState<number>(0);
   const [textTask, settextTask] = useState<string>("");
-  const [tareas, setTareas] = useState<string[][][]>([]);
+  const [tareas, setTareas] = useState<string[][][]>(JSON.parse(localStorage.getItem("tareas") ?? "[]"));
 
   // etiquetas de los días de la semana
   const etiquetasDias = [
-    "Lunes (月曜日)", 
-    "Martes (火曜日)", 
-    "Miércoles (水曜日)", 
-    "Jueves (木曜日)", 
-    "Viernes (金曜日)", 
-    "Sábado (土曜日)", 
+    "Lunes (月曜日)",
+    "Martes (火曜日)",
+    "Miércoles (水曜日)",
+    "Jueves (木曜日)",
+    "Viernes (金曜日)",
+    "Sábado (土曜日)",
     "Domingo (日曜日)"
   ];
-  
+
   // función para avanzar a la siguiente semana
   const handleNextWeek = () => {
     setIndiceSemana((prev) => (prev < 51 ? prev + 1 : prev));
@@ -44,7 +45,7 @@ function App() {
 
   // funcion para agregar una nueva tarea
   const handleAddTask = () => {
-    if (!textTask.trim()) return; 
+    if (!textTask.trim()) return;
     setTareas((prev) => {
       const nuevasTareas = [...prev]; // copia de la matriz de tareas
       if (!nuevasTareas[indiceSemana]) {
@@ -53,9 +54,10 @@ function App() {
       nuevasTareas[indiceSemana] = nuevasTareas[indiceSemana].map((taskDay, index) =>
         index === diaSeleccionado ? [...taskDay, textTask] : taskDay // agrega la tarea
       );
+      localStorage.setItem("tareas", JSON.stringify(nuevasTareas));
       return nuevasTareas;
     });
-    settextTask(""); 
+    settextTask("");
   };
 
   // función para eliminar una tarea
@@ -69,6 +71,7 @@ function App() {
         return taskDay;
       });
     }
+    localStorage.setItem("tareas", JSON.stringify(nuevasTareas));
     setTareas(nuevasTareas);
   };
 
@@ -95,7 +98,7 @@ function App() {
         <button onClick={handlePreviousWeek} disabled={indiceSemana === 0}>
           Semana Anterior (先週)
         </button>
-        <span>Semana {indiceSemana + 1} (第{indiceSemana + 1}週)</span>
+        <span>Semana {indiceSemana} (第{indiceSemana}週)</span>
         <button onClick={handleNextWeek} disabled={indiceSemana === 51}>
           Semana Siguiente (来週)
         </button>
@@ -164,3 +167,4 @@ function App() {
   );
 }
 export default App;
+
